@@ -6,7 +6,7 @@ public class Principal {
     public static void main(String[] args) {
 
         Scanner teclado=new Scanner(System.in);
-
+        ConsultarMoneda consulta=new ConsultarMoneda();
         System.out.println("*************************************");
         System.out.println("Bienvenido/a al conversor de moneda :)");
         System.out.println("");
@@ -19,8 +19,9 @@ public class Principal {
         System.out.println("7) Salir");
         System.out.println("");
         System.out.println("Elija una opción válida: ");
-        System.out.println("hola xd");
-
+        int numero= teclado.nextInt();
+        var json=consulta.obtenerDatos(numero);
+        System.out.println(json);
 
 
 
