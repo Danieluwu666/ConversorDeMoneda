@@ -8,30 +8,56 @@
     import java.util.Scanner;
 
     public class ConsultarMoneda {
+            URI direccion;
 
+        public Moneda obtenerDatos(int opcion) {
 
-        public String obtenerDatos(int numeroPelicula) {
+            switch (opcion) {
+                case 1:
+                    direccion = URI.create("https://v6.exchangerate-api.com/v6/cb5d89ba571c8515e24e0985/pair/USD/ARS");
+                    break;
+                case 2:
+                    direccion=URI.create("https://v6.exchangerate-api.com/v6/cb5d89ba571c8515e24e0985/pair/ARS/USD");
+                    break;
+                case 3:
+                    direccion=URI.create("https://v6.exchangerate-api.com/v6/cb5d89ba571c8515e24e0985/pair/USD/BRL");
+                    break;
+                case 4:
+                    direccion=URI.create("https://v6.exchangerate-api.com/v6/cb5d89ba571c8515e24e0985/pair/BRL/USD");
+                    break;
+                case 5:
+                    direccion=URI.create("https://v6.exchangerate-api.com/v6/cb5d89ba571c8515e24e0985/pair/USD/COP");
+                    break;
+                case 6:
+                    direccion=URI.create("https://v6.exchangerate-api.com/v6/cb5d89ba571c8515e24e0985/pair/COP/USD");
+                    break;
+                case 7:
+                    System.out.println("Gracias por usar el conversor");
+                    System.exit(0);
+                    break;
+            }
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://v6.exchangerate-api.com/v6/cb5d89ba571c8515e24e0985/latest/USD"))
+                    .uri(direccion)
                     .build();
-            HttpResponse<String> response = null;
+
+
+
             try {
-                response = client
+                HttpResponse<String> response = client
                         .send(request, HttpResponse.BodyHandlers.ofString());
-            } catch (IOException e) {
-                System.out.println("Error");
-            } catch (InterruptedException e) {
-                System.out.println("Error");
+
+                return new Gson().fromJson(response.body(), Moneda.class);
+
+            } catch (Exception e) {
+                throw new RuntimeException("No encontré datos");
+
             }
 
-            String json = response.body();
-            return json;
+
+
+
         }
-
-
-
-
 
 
 }
