@@ -35,6 +35,8 @@
                     System.out.println("Gracias por usar el conversor");
                     System.exit(0);
                     break;
+                default:
+                    System.out.println("opcion no valida");
             }
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
