@@ -1,13 +1,14 @@
 import com.google.gson.Gson;
-
 import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
 
+        Scanner teclado = new Scanner(System.in);
+        ConsultarMoneda consulta = new ConsultarMoneda();
+
         while (true) {
-            Scanner teclado = new Scanner(System.in);
-            ConsultarMoneda consulta = new ConsultarMoneda();
+
             System.out.println("*************************************");
             System.out.println("Bienvenido/a al conversor de moneda :)");
             System.out.println("");
@@ -20,14 +21,32 @@ public class Principal {
             System.out.println("7) Salir");
             System.out.println("");
             System.out.println("Elija una opción válida: ");
-            int numero = teclado.nextInt();
-            var json = consulta.obtenerDatos(numero);
-            System.out.println(json);
+
+                int numero = teclado.nextInt();
+
+
+
+            // Obtener los datos de la API
+            Moneda moneda = consulta.obtenerDatos(numero);
+            if (moneda == null) {
+                System.out.println("No se pudo obtener la tasa de conversión.");
+                continue;
+            }
+
+
+            System.out.println("Ingrese el valor que desea convertir: ");
+            double valorUsuario = teclado.nextDouble();
+
+            // Realizar la conversión
+            double conversionRate = Double.parseDouble(moneda.conversion_rate());
+            double resultado = conversionRate * valorUsuario;
+
+            // Mostrar el resultado
+            System.out.println("El resultado de la conversión es: " + resultado);
+
+
 
         }
-
-
-
-
     }
 }
+
