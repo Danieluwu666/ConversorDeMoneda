@@ -51,11 +51,13 @@
 
                 return new Gson().fromJson(response.body(), Moneda.class);
 
+            } catch (IOException e) {
+                throw new RuntimeException("Error al conectarse a la API. Verifique su conexión a Internet.");
+            } catch (InterruptedException e) {
+                throw new RuntimeException("La solicitud fue interrumpida.");
             } catch (Exception e) {
-                throw new RuntimeException("No encontré datos");
-
+                throw new RuntimeException("Error inesperado: " + e.getMessage());
             }
-
 
 
 

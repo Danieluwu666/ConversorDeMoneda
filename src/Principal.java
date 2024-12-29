@@ -24,6 +24,10 @@ public class Principal {
                 System.out.println("Elija una opción válida: ");
                 int numero = teclado.nextInt();
 
+                if (numero < 1 || numero > 7) {
+                    System.out.println("Por favor, elija una opción entre 1 y 7.");
+                    continue;
+                }
 
 
                 // Obtener los datos de la API
@@ -40,14 +44,16 @@ public class Principal {
                 // Realizar la conversión
                 double conversionRate = Double.parseDouble(moneda.conversion_rate());
                 double resultado = conversionRate * valorUsuario;
-                String monedaBase= moneda.base_code();
-                String monedaFinal=moneda.target_code();
+                String monedaBase = moneda.base_code();
+                String monedaFinal = moneda.target_code();
                 // Mostrar el resultado
-                System.out.println("El resultado de la conversión de "+valorUsuario+" "+monedaBase+" corresponde a: "+ resultado +" "+monedaFinal);
-            }catch (NumberFormatException e){
-                System.out.println("Valor invalido");
-            }catch (Exception e){
-                System.out.println("Algo anda mal "+e.getMessage());
+                System.out.println("El resultado de la conversión de " + valorUsuario + " " + monedaBase + " corresponde a: " + resultado + " " + monedaFinal);
+
+
+            }catch (NumberFormatException e) {
+                System.out.println("Error: No se pudo convertir el valor. Verifique los datos.");
+            } catch (Exception e) {
+                System.out.println("Ocurrió un error inesperado: " + e.getMessage());
             }
 
 
